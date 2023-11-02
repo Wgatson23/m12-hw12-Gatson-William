@@ -15,14 +15,14 @@ body {
 
 .body__grid {
 	display: grid;
-	column-gap: auto;
-	row-gap: auto;
+	column-gap: 40px;
+	row-gap: 30px;
 	grid-template-areas:
 		"header header header"
 		"nav img_card img_card"
 		"footer footer footer";
-	grid-template-columns: 0 3fr 1fr 0;
-	grid-template-rows: 100px 1fr 60px;
+	grid-template-columns: 0.2fr 1fr 0.2fr;
+	grid-template-rows: 100px 300px 1 60px;
 	justify-content: center;
 }
 
@@ -46,14 +46,13 @@ body {
 }
 
 .nav__container {
-	grid-template-columns: 2fr;
 	box-shadow: var(--gray) 4px 4px 10px 2px;
 	display: grid;
 	row-gap: 24px;
-	grid-area: left;
+	grid-template-columns: 1fr;
 	min-width: 200px;
 	justify-items: center;
-	padding: 12px 0 24px;
+	padding: 12px 0 20px;
 }
 
 .nav__link,
@@ -78,12 +77,12 @@ body {
 	grid-area: img_card;
 }
 
-.img_card__container {
+.img_card__container_two {
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	column-gap: 24px;
-	row-gap: 24px;
-	padding: 24px;
+	row-gap: 15px;
+	grid-auto-rows: 350px;
+	grid-template-columns: repeat(4, 1fr);
 }
 
 .nav__link--active {
@@ -100,7 +99,7 @@ body {
 	width: 300px;
 	box-shadow: var(--gray) 4px 4px 10px 2px;
 	border-radius: 3px;
-	grid-template-columns: 2fr;
+	grid-template-columns: 3fr;
 }
 
 .img_card__text {
@@ -115,27 +114,59 @@ body {
 }
 
 @media screen and (max-width: 1100px) {
+	.body__grid {
+		justify-items: center;
+		grid-template-areas:
+			"header"
+			"nav"
+			"img_card"
+			"footer";
+		grid-template-columns: 1fr;
+		grid-template-rows: 100px 100px 1fr 10px;
+	}
+
+	.header {
+		grid-area: header;
+		justify-items: center;
+	}
+
 	.header__title {
 		font-size: 2rem;
+		margin: 0;
 	}
 
 	.nav__container {
 		width: 80vw;
 		min-width: 300px;
 		grid-template-columns: repeat(4, 1fr);
+		justify-items: center;
+		grid-auto-flow: row;
+	}
+
+	.img_card__container_two {
+		grid-area: img_card;
+		display: grid;
+		row-gap: 10px;
+		grid-auto-rows: 350px;
+		grid-template-columns: repeat(1, 2fr);
 	}
 
 	.nav__link,
 	.nav__link--active {
 		text-decoration: underline;
 	}
-
 	.nav__link--active {
 		padding: 0;
 	}
-
 	.nav__link::after,
 	.nav__link--active::after {
 		display: none;
+	}
+
+	.footer {
+		grid-area: footer;
+		display: grid;
+		align-items: center;
+		justify-items: center;
 	}
 }
